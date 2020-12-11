@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for {{cookiecutter.blueprint_name}} in {{cookiecutter.blueprint_name}}s %}
+<p>{{{{cookiecutter.blueprint_name}}}}.name</p>
+{% endfor %}
+{% endblock %}
+
+{% block script %}
+<script src=""></script>
+{% endblock %}
