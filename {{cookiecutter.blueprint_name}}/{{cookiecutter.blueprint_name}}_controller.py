@@ -52,17 +52,18 @@ def create():
 @login_required
 def update(id):
     {{cookiecutter.blueprint_name}} = {{cookiecutter.blueprint_name.capitalize()}}.query.get(id)
-    form = {{cookiecutter.blueprint_name.capitalize()}}UpdateForm()
-    if request.method == "GET":
-        
-        return render_template('{{cookiecutter.blueprint_name}}-update.html', form=form)
-    if request.method == "POST":
+    form = {{cookiecutter.blueprint_name.capitalize()}}UpdateForm(request.POST, obj={{cookiecutter.blueprint_name}})
+    if request.POST:
         if form.validate_on_submit():
-            {{cookiecutter.blueprint_name}}.update(form.data)
-            db.session.add({{cookiecutter.blueprint_name}})
-            db.session.commit()
-            flash("was updated", "is-success")
-    return render_template('{{cookiecutter.blueprint_name}}-view.html', {{cookiecutter.blueprint_name}}={{cookiecutter.blueprint_name}})
+            form.populate_obj({{cookiecutter.blueprint_name}})
+            {{cookiecutter.blueprint_name}}.save()
+            flash("{{cookiecutter.blueprint_name}} with name {} was updated".format({{cookiecutter.blueprint_name}}.name), "is-success")
+            return render_template('{{cookiecutter.blueprint_name}}-view.html', {{cookiecutter.blueprint_name}}={{cookiecutter.blueprint_name}})
+        else:
+            flash("Ressource was not updated".format({{cookiecutter.blueprint_name}}.name), "is-warning")
+            return redirect(url_for("{{cookiecutter.blueprint_name}}.update", id=id)
+    return render_template('{{cookiecutter.blueprint_name}}-update.html', form=form)
+    
 
 
 @{{cookiecutter.blueprint_name}}.route("/delete/<int:id>", methods=["GET"])
@@ -87,4 +88,3 @@ def delete_all():
     db.session.commit()
     flash("All {:} {{cookiecutter.blueprint_name}} were deleted.".format(delete_count), "is-warning")
     return redirect(url_for("{{cookiecutter.blueprint_name}}.index"))
-
