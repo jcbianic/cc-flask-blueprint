@@ -13,7 +13,7 @@ For templates :
 
 ## What you get
 
-...for a blueprint named "demo":
+...for a blueprint named "demo", you would get the following file structure, with basic wiring in place. For now templates are mostly empty.
 
 ````
 demo

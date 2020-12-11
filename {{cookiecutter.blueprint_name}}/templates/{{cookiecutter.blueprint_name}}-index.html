@@ -1,15 +1,13 @@
 {% raw %}
-
 {% extends "layout.html" %}
 
+{% block style %}
+{% endblock %}
+
 {% block content %}
-{% for {{cookiecutter.blueprint_name}} in {{cookiecutter.blueprint_name}}s %}
-<p>{{{{cookiecutter.blueprint_name}}}}.name</p>
-{% endfor %}
+<p>This is the index</p>
 {% endblock %}
 
 {% block script %}
-<script src=""></script>
 {% endblock %}
-
 {% endraw %}
