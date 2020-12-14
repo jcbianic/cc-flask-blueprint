@@ -1,6 +1,6 @@
 from app import db
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
-from flask-login import login_required
+from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask_login import login_required
 
 from .{{cookiecutter.blueprint_name}}_model import {{cookiecutter.blueprint_name.capitalize()}}
 from .{{cookiecutter.blueprint_name}}_form import {{cookiecutter.blueprint_name.capitalize()}}CreateForm, {{cookiecutter.blueprint_name.capitalize()}}UpdateForm
@@ -46,7 +46,7 @@ def create():
             for e in form.errors:
                 log.warning(e)
             return redirect(url_for("{{cookiecutter.blueprint_name}}.create"))
-    
+
 
 @{{cookiecutter.blueprint_name}}.route("/update/<int:id>", methods=["GET", "POST"])
 @login_required
@@ -60,8 +60,8 @@ def update(id):
             flash("{{cookiecutter.blueprint_name}} with name {} was updated".format({{cookiecutter.blueprint_name}}.name), "is-success")
             return render_template('{{cookiecutter.blueprint_name}}-view.html', {{cookiecutter.blueprint_name}}={{cookiecutter.blueprint_name}})
         else:
-            flash("Ressource was not updated".format({{cookiecutter.blueprint_name}}.name), "is-warning")
-            return redirect(url_for("{{cookiecutter.blueprint_name}}.update", id=id)
+            flash("Ressource {} was not updated".format({{cookiecutter.blueprint_name}}.name), "is-warning")
+            return redirect(url_for("{{cookiecutter.blueprint_name}}.update", id=id))
     return render_template('{{cookiecutter.blueprint_name}}-update.html', form=form)
     
 
